@@ -1,0 +1,16 @@
+version: "3"
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "4000-5000:4000-5000"
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - ./php-location.conf:/etc/nginx/shared/php-location.conf
+            - ./projects:/projects
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./projects:/projects
